@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue JS Number Grid</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">     -->
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>    
+    <style>
+        h1{text-align:center;color: hotpink;}
+        fieldset{margin-bottom: 1rem;}
+        button{background-color: hotpink;}
+        .hilite{background-color: hotpink;}
+        .grid{display:flex;flex-wrap:wrap;flex-flow:row wrap;justify-content:center;align-items:center;}
+        .grid-item{display:flex;align-items:center;justify-content:space-around;margin:4px;border:1px solid hotpink;border-radius:8px;text-align:center;height:60px;flex-basis:9%;}
+        @media(max-width: 1047px){.grid-item{flex-basis:8.5%;}}        
+        @media(max-width: 714px){.grid-item{flex-basis:8%;}}        
+        @media(max-width: 547px){.grid-item{flex-basis:7.5%;}}        
+        @media(max-width: 447px){.grid-item{flex-basis:14.5%;}button{width:100%}}        
+    </style> 
+</head>
+<body>
+    <header>
+        <h1>Number Grid Manipulator</h1>
+    </header>
+    <div id="grid" class="row">
+        <div class="col col-sm-12">
+            <fieldset class="border p-2">
+                <legend class="w-auto">Operations</legend> 
+                <div>
+                    <button @click="showPrimes()">Primes</button>      
+                    <button @click="showOrdinals()">Ordinals</button>      
+                    <button @click="showFibos(10)">Fibonacci's</button>      
+                </div>
+            </fieldset>
+            <fieldset class="border p-2">
+                <legend class="w-auto">Grid</legend>     
+                <div class="row grid">
+                    <div v-for="number in gridNum" class="col-sm-1 offset-sm-1 grid-item" :style="{backgroundColor: number.hilite ? 'hotpink' : '#fff'}">{{ number.id }}</div>
+                </div>
+            </fieldset>   
+        </div> 
+    </div>
+</body>
+</html>
