@@ -1,7 +1,12 @@
+//console toggle
+const DEBUG=false
+const INFO=false
+const WARN=false
+const TABLE=true
 const app = Vue.createApp({
     data() {
       return {
-        //array of number objects
+        //array of number objects {id: int, hilight: bool}
         gridNum: [],
         sequence: 0,
       };
@@ -13,7 +18,7 @@ const app = Vue.createApp({
         for(let i=1;i<=100;i++) {
           grid[i-1] = { 'id': i, 'hilite': false}
         }
-        // console.table(grid)
+        if(TABLE) console.table(grid)
         this.gridNum = grid
       },
       //prepare grid for next operation
@@ -26,14 +31,14 @@ const app = Vue.createApp({
         if(!seqPreserve) {
           this.sequence=0
         }
-        // console.table(this.gridNum[num].id)
+        if(TABLE) console.table(this.gridNum[num].id)
       },
       //return prime numbers from 1 to num
       getPrimes: (num)=>Array(num-1).fill().map((e,i)=>2+i).filter((e,i,a)=>a.slice(0,i).every(x=>e%x!==0)),
       showPrimes() {
         //highlight prime numbers
         this.reset()
-        // console.log(this.getPrimes(100))
+        if(DEBUG) console.debug(this.getPrimes(100))
         const primes = this.getPrimes(100)
         for(num in this.gridNum) {
           if(primes.includes(this.gridNum[num].id)) {
@@ -68,7 +73,7 @@ const app = Vue.createApp({
           a = a + b;
           b = temp;
           num--;
-          console.log(b+"\n");
+          if(DEBUG) console.debug(b+"\n");
           this.gridNum[b-1].hilite=true
         }
       },
@@ -112,7 +117,7 @@ const app = Vue.createApp({
             case 9: roman+="IX"
             break;
           }
-          console.log(currentNum+"="+roman+"\n")
+          if(TABLE) console.table(currentNum+"="+roman+"\n")
           this.gridNum[num].id=roman
         }
       },
@@ -120,7 +125,6 @@ const app = Vue.createApp({
         this.reset(true) //preserve sequence          
         for(num in this.gridNum) {
           if(this.gridNum[num].id%this.sequence===0) {
-            console.log(this.gridNum[num].id%this.sequence===0)
             this.gridNum[num].hilite=true
           }
         }
