@@ -17,11 +17,14 @@ const app = Vue.createApp({
         this.gridNum = grid
       },
       //prepare grid for next operation
-      reset() {
+      reset(seqPreserve) {
         for(num in this.gridNum) {
           let currentNum=parseInt(num)
           this.gridNum[num].id=currentNum+1 //make sure the id isnt a string from ordinalizing      
           this.gridNum[num].hilite=false //reset hilighted items     
+        }
+        if(!seqPreserve) {
+          this.sequence=0
         }
         // console.table(this.gridNum[num].id)
       },
@@ -114,7 +117,7 @@ const app = Vue.createApp({
         }
       },
       showSequence() {
-        this.reset()           
+        this.reset(true) //preserve sequence          
         for(num in this.gridNum) {
           if(this.gridNum[num].id%this.sequence===0) {
             console.log(this.gridNum[num].id%this.sequence===0)
