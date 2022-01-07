@@ -16,38 +16,58 @@
         h1{text-align:center;color:hotpink;font-weight:bold;}
         fieldset{margin-bottom:1rem;}
         legend{font-size:20px;font-weight:bold;}
-        button{background-color:hotpink;font-size:18px}
+        input select {background-color:hotpink;font-size:18px}
         .hilite{background-color:hotpink;}
         .grid{display:flex;flex-wrap:wrap;flex-flow:row wrap;justify-content:center;align-items:center;}
         .grid-item{display:flex;align-items:center;justify-content:space-around;margin:4px;border:1px solid hotpink;border-radius:8px;text-align:center;height:60px;flex-basis:9%;}
         @media(max-width:1047px){.grid-item{flex-basis:8.5%;}}        
         @media(max-width:714px){.grid-item{flex-basis:8%;}}        
         @media(max-width:547px){.grid-item{flex-basis:7.5%;}}        
-        @media(max-width:447px){.grid-item{flex-basis:14.5%;}button{width:100%}}        
+        @media(max-width:447px){.grid-item{flex-basis:14.5%;}button{width:100%}} 
+        button, select{background-color:hotpink;font-size:18px;margin:4px;padding-top:2px;border:none;border-bottom:solid 3px rgb(252, 0, 126);}
+        select {
+            width:140px;
+            height: 27.5px;
+            padding: 0 6px;
+            -webkit-appearance:none;
+            -moz-appearance:none;
+            appearance:none;
+            background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Ctitle%3Edown-arrow%3C%2Ftitle%3E%3Cg%20fill%3D%22%23000000%22%3E%3Cpath%20d%3D%22M10.293%2C3.293%2C6%2C7.586%2C1.707%2C3.293A1%2C1%2C0%2C0%2C0%2C.293%2C4.707l5%2C5a1%2C1%2C0%2C0%2C0%2C1.414%2C0l5-5a1%2C1%2C0%2C1%2C0-1.414-1.414Z%22%20fill%3D%22%23000000%22%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+            background-size:.75em;
+            background-position:calc(100% - .5em) center;
+            background-repeat:no-repeat;
+        }
+        select::-ms-expand {display: none;}
     </style> 
 </head>
 <body>
     <header>
         <h1>Number Grid Manipulator</h1>
     </header>
-    <div id="grid" class="row">
-        <div class="col col-sm-12">
-            <fieldset class="border p-2">
-                <legend class="w-auto">Operations</legend> 
-                <div>
-                    <button @click="showPrimes()">Primes</button>      
-                    <button @click="showFibos(10)">Fibonacci's</button>      
-                    <button @click="showOrdinals()">Ordinals</button>      
-                    <button @click="showRoman()">Roman</button>      
-                </div>
-            </fieldset>
-            <fieldset class="border p-2">
-                <legend class="w-auto">Grid</legend>     
-                <div class="row grid">
-                    <div v-for="number in gridNum" class="col-sm-1 offset-sm-1 grid-item" :style="{backgroundColor: number.hilite ? 'hotpink' : '#fff'}">{{ number.id }}</div>
-                </div>
-            </fieldset>   
-        </div> 
+    <div id="app">
+        <fieldset>
+            <legend>Operations</legend> 
+            <div>
+                <button @click="showPrimes()">Primes</button>      
+                <button @click="showFibos(10)">Fibonacci's</button>      
+                <button @click="showOrdinals()">Ordinals</button>      
+                <button @click="showRoman()">Roman</button>  
+                <select name="sequence" id="sequence" @change="showSequence()" v-model="sequence">
+                    <option value="0">Sequence</option>
+                    <option v-for="i in 10" :key="i">{{i}}</option>
+                </select>   
+            </div>
+        </fieldset>
+        <div id="grid">
+            <div>
+                <fieldset>
+                    <legend>Grid</legend>     
+                    <div class="row grid">
+                        <div v-for="number in gridNum" class="col-sm-1 offset-sm-1 grid-item" :style="{backgroundColor: number.hilite ? 'hotpink' : '#fff'}">{{ number.id }}</div>
+                    </div>
+                </fieldset>   
+            </div> 
+        </div>
     </div>
 </body>
 </html>

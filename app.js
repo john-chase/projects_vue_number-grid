@@ -2,7 +2,8 @@ const app = Vue.createApp({
     data() {
       return {
         //array of number objects
-        gridNum: []
+        gridNum: [],
+        sequence: 0,
       };
     },
     methods: { 
@@ -12,7 +13,7 @@ const app = Vue.createApp({
         for(let i=1;i<=100;i++) {
           grid[i-1] = { 'id': i, 'hilite': false}
         }
-        console.table(grid)
+        // console.table(grid)
         this.gridNum = grid
       },
       //prepare grid for next operation
@@ -22,7 +23,7 @@ const app = Vue.createApp({
           this.gridNum[num].id=currentNum+1 //make sure the id isnt a string from ordinalizing      
           this.gridNum[num].hilite=false //reset hilighted items     
         }
-        console.table(this.gridNum[num].id)
+        // console.table(this.gridNum[num].id)
       },
       //return prime numbers from 1 to num
       getPrimes: (num)=>Array(num-1).fill().map((e,i)=>2+i).filter((e,i,a)=>a.slice(0,i).every(x=>e%x!==0)),
@@ -111,6 +112,15 @@ const app = Vue.createApp({
           console.log(currentNum+"="+roman+"\n")
           this.gridNum[num].id=roman
         }
+      },
+      showSequence() {
+        this.reset()           
+        for(num in this.gridNum) {
+          if(this.gridNum[num].id%this.sequence===0) {
+            console.log(this.gridNum[num].id%this.sequence===0)
+            this.gridNum[num].hilite=true
+          }
+        }
       }      
     },
     created() {
@@ -118,4 +128,4 @@ const app = Vue.createApp({
     }
   });
   app.config.productionTip = false
-  app.mount('#grid');
+  app.mount('#app');
