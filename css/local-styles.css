@@ -1,15 +1,16 @@
-body{font-family:'Roboto',sans-serif;font-size:1em}
-header{position:relative;height:140px;width:100%;display:table;background-image:url("../images/number-faded-1920.jpg");background-size:cover;}
-h1{position:relative;font-family:'Righteous',sans-serif;text-align:center;color:orange;font-weight:bold;font-size:2.5em;margin-bottom:0;text-shadow: 2px 2px 2px black;display:table-cell;vertical-align:middle;}
+body{font-family:'Roboto',sans-serif;font-size:1em;background:url("../images/chalk-numbers-1920.jpg") top left repeat;background-size:90%;}
+header{position:relative;height:100px;width:100%;display:table;}
+h1{position:relative;font-family:'Righteous',sans-serif;text-align:center;color:orange;font-weight:bold;font-size:2.5em;margin-bottom:0;text-shadow: 2px 2px #fc007e;display:table-cell;vertical-align:middle;}
 .ops-container{display:inline-block;width:100%;}
 .right{float:right;}
 .left{float:left;}
-fieldset{margin-bottom:1rem;}
-legend{font-size:1.5em;font-weight:bold;}
+fieldset{margin:.5rem 4rem;border:2px solid #fc007e;background-color:white}
+legend{font-family:'Righteous',sans-serif;font-size:1.5em;font-weight:bold;background-color:#fff;border-radius:8px;padding:0px 24px 3px 6px;color:orange;border:2px solid #fc007e;text-shadow: 1px 1px #fc007e;}
 .grid{display:flex;flex-wrap:wrap;flex-flow:row wrap;justify-content:center;align-items:center;}
-.grid-item{display:flex;align-items:center;justify-content:space-around;margin:4px;border:1px solid #fc007e;border-radius:8px;text-align:center;height:60px;flex-basis:9%;}
+.grid-item{display:flex;align-items:center;justify-content:space-around;margin:4px;border:2px solid #fc007e;border-radius:8px;text-align:center;height:60px;flex-basis:9%;}
 @media(max-width:1047px){.grid-item{flex-basis:8.5%;}}        
-@media(max-width:714px){.grid-item{flex-basis:8%;}button,select{width:100%!important;text-align:left;}.grid-item{font-size:smaller!important}h1{display:table-caption;text-align:left!important;margin-bottom:.5em;}.left{float:none;}.right{float:none;}}        
+@media(max-width:775px){.left{float:none;}.right{float:none;}button,select{width:100%!important;text-align:left;}}        
+@media(max-width:714px){.grid-item{flex-basis:8%;}.grid-item{font-size:smaller!important}h1{margin:1.5rem 0 -4rem 0;font-size:2rem;display:table-caption;}header{height:40px;}}        
 @media(max-width:547px){.grid-item{flex-basis:7.5%;}}        
 @media(max-width:447px){.grid-item{flex-basis:14.5%;}} 
 input,select,textarea,button{font-family:inherit;font-size:inherit;background-color:orange;margin:4px;padding-top:2px;border:none;

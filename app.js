@@ -2,7 +2,7 @@
 const DEBUG=false
 const INFO=false
 const WARN=false
-const TABLE=true
+const TABLE=false
 const app = Vue.createApp({
     data() {
       return {
@@ -128,7 +128,19 @@ const app = Vue.createApp({
             this.gridNum[num].hilite=true
           }
         }
-      }      
+      },  
+      showSquares(){
+        this.reset()
+        for(num in this.gridNum) {
+          let currentNumber=this.gridNum[num].id
+          let sqrt=Math.sqrt(currentNumber)
+          console.log(currentNumber, sqrt)
+          if(sqrt%1===0) {
+            this.gridNum[num].hilite=true
+          }
+        }          
+        if(DEBUG) console.log()
+      }    
     },
     created() {
       this.initGrid();

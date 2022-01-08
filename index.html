@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Vue JS Number Grid</title>
+    <title>Magic Number Grid (simple Vue.js)</title>
     <script src="https://unpkg.com/vue@next" defer></script>
     <script src="app.js" defer></script>    
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,13 +15,14 @@
 </head>
 <body>
     <header>
-        <h1>Number Grid Manipulator</h1>
+        <h1>Magic Number Grid</h1>
     </header>
     <div id="app">
         <fieldset>
             <legend>Operations</legend> 
             <div class="ops-container">          
             <div class="left">
+                <button @click="showSquares()">Squares</button>  
                 <button @click="showPrimes()">Primes</button>      
                 <button @click="showFibos(10)">Fibonacci's</button>      
                 <button @click="showOrdinals()">Ordinals</button>      
