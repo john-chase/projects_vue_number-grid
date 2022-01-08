@@ -9,7 +9,7 @@
     <script src="app.js" defer></script>    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">   
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Paytone+One&family=Russo+One&family=Fugaz+One&family=Roboto&display=swap" rel="stylesheet">
     <link href="/projects/css/reset.css" rel="stylesheet">   
     <link href="css/local-styles.css" rel="stylesheet">   
 </head>
@@ -18,14 +18,16 @@
         <h1>Magic Number Grid</h1>
     </header>
     <div id="app">
-        <fieldset>
+        <div id="docs">{{ docs }}</div>
+        <div class="trans-top"></div>
+        <fieldset style="background-color:rgba(255,255,255,.825)!important">
             <legend>Operations</legend> 
             <div class="ops-container">          
             <div class="left">
-                <button @click="showSquares()">Squares</button>  
-                <button @click="showPrimes()">Primes</button>      
-                <button @click="showFibos(10)">Fibonacci's</button>      
-                <button @click="showOrdinals()">Ordinals</button>      
+                <button @click="showSquares()">Square</button>  
+                <button @click="showPrimes()">Prime</button>      
+                <button @click="showFibos(10)">Fibonacci</button>      
+                <button @click="showOrdinals()">Ordinal</button>      
                 <button @click="showRoman()">Roman</button>  
                 <select name="sequence" id="sequence" @change="showSequence()" v-model="sequence">
                     <option value="0">Sequence</option>
@@ -33,10 +35,11 @@
                 </select>   
             </div>
             <div class="right"><button @click="reset()">Reset</button></div>
+            <div class="right"><button @click="showDocs()">Documentation</button></div>
         </fieldset>
         <div id="grid">
             <div>
-                <fieldset>
+                <fieldset style="background-color:rgba(255,255,255,.825)!important">
                     <legend>Grid</legend>     
                     <div class="row grid">
                         <div v-for="number in gridNum" class="col-sm-1 offset-sm-1 grid-item" :style="{backgroundColor: number.hilite ? 'orange' : '#fff'}">{{ number.id }}</div>
@@ -44,6 +47,7 @@
                 </fieldset>   
             </div> 
         </div>
+        <div class="trans-bottom"></div>
     </div>
 </body>
 </html>
