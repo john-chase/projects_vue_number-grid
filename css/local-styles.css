@@ -1,4 +1,4 @@
-body{font-family:'Roboto',sans-serif;font-size:1em;background:url("../images/chalk-numbers-1920.jpg") top left repeat;background-size:90%;}
+body{font-family:'Roboto',sans-serif;font-size:1em;background-image:url("../images/chalk-numbers-1920.jpg"),url("../images/chalk-numbers-1920-1.jpg");background-position:top left,bottom right;background-size:55%,55%;background-repeat:repeat-x}
 header{position:relative;height:100px;width:100%;display:table;}
 h1{position:relative;font-family:'Righteous',sans-serif;text-align:center;color:orange;font-weight:bold;font-size:2.5em;margin-bottom:0;text-shadow: 2px 2px #fc007e;display:table-cell;vertical-align:middle;}
 .ops-container{display:inline-block;width:100%;}
