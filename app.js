@@ -14,13 +14,12 @@ const app = Vue.createApp({
         docs: '',
         //available colors
         colors: [
-          {primary: 'Colors', secondary: ''},
-          {primary: 'orange', secondary: 'hotpink'},
-          {primary: 'dodgerblue', secondary: 'purple'},
-          {primary: 'atlantis',secondary: 'lime'},
-          {primary: 'sand', secondary: 'tortilla'},
-          {primary: 'aqua', secondary: 'teal'},
-          {primary: 'burgundy', secondary: 'gold'},
+          {primary: 'orange', secondary: 'hotpink', tertiary: 'black'},
+          {primary: 'dodgerblue', secondary: 'purple', tertiary: 'white'},
+          {primary: 'palegreen',secondary: 'lime', tertiary: 'black'},
+          {primary: 'tan', secondary: 'darkgoldenrod', tertiary: 'black'},
+          {primary: 'aqua', secondary: 'teal', tertiary: 'black'},
+          {primary: 'firebrick', secondary: 'gold', tertiary: 'white'},
         ],
         //color selector index
         index: '0'
@@ -28,8 +27,8 @@ const app = Vue.createApp({
     },
     computed: {
       getColorClass() {
-        console.warn(this.index)
-        switch (this.index) {
+        if(DEBUG) console.log(this.index)
+        switch (this.index+1) {
           case 1: return 'color1'
           break
           case 2: return 'color2'
@@ -42,7 +41,9 @@ const app = Vue.createApp({
           break
           case 6: return 'color6'
           break
-          default: return '0'
+          case 7: return 'color7'
+          break
+          default: return 'color1'
           break
         }
       }
@@ -58,7 +59,7 @@ const app = Vue.createApp({
         this.gridNum = grid
       },
       //prepare grid for next operation
-      reset(seqPreserve) {
+      reset(seqPreserve=false,colorPreserve=true) { //console.warn(seqPreserve,colorPreserve)
         for(num in this.gridNum) {
           let currentNum=parseInt(num)
           this.gridNum[num].id=currentNum+1 //make sure the id isnt a string from ordinalizing      
@@ -67,8 +68,10 @@ const app = Vue.createApp({
         if(!seqPreserve) {
           this.sequence=0
         }
+        if(!colorPreserve) {
+          this.index='0'
+        }        
         this.docs=''
-        this.index='0'
         if(TABLE) console.table(this.gridNum[num].id)
       },
       //return prime numbers from 1 to num
@@ -207,15 +210,16 @@ const app = Vue.createApp({
         if(DEBUG) console.log(this.colors[this.index].primary+'/'+this.colors[this.index].secondary)
       },
       getColorStyle(num) {
-        if(DEBUG) console.log("num: "+JSON.stringify(num), num.hilite ? 'silver' : '#fff')
-        if(num.hilite) {
-          return 'background-color:silver'
-         } else {
-           return 'background-color:#fff'
-         }
+        if(!DEBUG) console.log("index: "+this.index+ ", num: "+JSON.stringify(num), num.hilite ? 'silver' : '#fff')
+        if(num.hilite && this.index>0) {
+          return 'background-color:'+this.colors[this.index-1].primary+';color:'+this.colors[this.index-1].tertiary
+        } else if(num.hilite && this.index===0) {
+          return 'background-color:silver;color:black'
+        } else {
+           return 'background-color:white;color:black'
+        }
       } 
     },
-    //create a watcher to update docs div style when showDocs is clicked
     created() {
       this.initGrid();
     }
