@@ -24,7 +24,7 @@ button{height:27px;}
 select {
     width:165px;
     height: 27px;
-    padding: 0 6px;
+    padding: 2px 6px;
     -webkit-appearance:none;
     -moz-appearance:none;
     appearance:none;

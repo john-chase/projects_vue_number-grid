@@ -14,6 +14,7 @@ const app = Vue.createApp({
         docs: '',
         //available colors
         colors: [
+          {primary: 'Colors', secondary: ''},
           {primary: 'orange', secondary: 'hotpink'},
           {primary: 'dodgerblue', secondary: 'purple'},
           {primary: 'atlantis',secondary: 'lime'},
@@ -22,12 +23,13 @@ const app = Vue.createApp({
           {primary: 'burgundy', secondary: 'gold'},
         ],
         //color selector index
-        selectedIndex: '0'
+        index: '0'
       };
     },
     computed: {
       getColorClass() {
-        switch (this.selectedIndex) {
+        console.warn(this.index)
+        switch (this.index) {
           case 1: return 'color1'
           break
           case 2: return 'color2'
@@ -40,7 +42,7 @@ const app = Vue.createApp({
           break
           case 6: return 'color6'
           break
-          default: ''
+          default: return '0'
           break
         }
       }
@@ -65,6 +67,8 @@ const app = Vue.createApp({
         if(!seqPreserve) {
           this.sequence=0
         }
+        this.docs=''
+        this.index='0'
         if(TABLE) console.table(this.gridNum[num].id)
       },
       //return prime numbers from 1 to num
@@ -168,7 +172,7 @@ const app = Vue.createApp({
         for(num in this.gridNum) {
           let currentNumber=this.gridNum[num].id
           let sqrt=Math.sqrt(currentNumber)
-          console.log(currentNumber, sqrt)
+          if(DEBUG) console.log(currentNumber, sqrt)
           if(sqrt%1===0) {
             this.gridNum[num].hilite=true
           }
@@ -198,9 +202,17 @@ const app = Vue.createApp({
         }
       },
       changeColors(event, selected){
-        console.log("Sel="+selected) 
-        this.selectedIndex=selected
-        console.log(this.colors[this.selectedIndex-1].primary+'/'+this.colors[this.selectedIndex-1].secondary)
+        if(DEBUG) console.log("Sel="+selected) 
+        this.index=selected
+        if(DEBUG) console.log(this.colors[this.index].primary+'/'+this.colors[this.index].secondary)
+      },
+      getColorStyle(num) {
+        if(DEBUG) console.log("num: "+JSON.stringify(num), num.hilite ? 'silver' : '#fff')
+        if(num.hilite) {
+          return 'background-color:silver'
+         } else {
+           return 'background-color:#fff'
+         }
       } 
     },
     //create a watcher to update docs div style when showDocs is clicked

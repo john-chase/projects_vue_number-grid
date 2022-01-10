@@ -23,7 +23,7 @@
         <fieldset :class="getColorClass" style="background-color:rgba(255,255,255,.825)!important">
             <legend :class="getColorClass">Operations</legend> 
             <div class="ops-container">          
-            <div class="left getColorClass">
+            <div class="left" :class="getColorClass">
                 <button @click="showSquares()">Square</button>  
                 <button @click="showPrimes()">Prime</button>      
                 <button @click="showFibos(10)">Fibonacci</button>      
@@ -36,16 +36,17 @@
             </div>
             <div class="right"><button @click="reset()">Reset</button></div>
             <div class="right"><button @click="showDocs(docs)">{{docs?'Hide':'Show'}} Docs</button></div>
-            <select name="colors" id="colors" @change="changeColors($event, $event.target.selectedIndex)">
-                <option value="0">Colors</option>
-                <option v-for="color in colors">{{color.primary}}/{{color.secondary}}</option>
-            </select>             
+            <div class="right">
+                <select name="colors" @change="changeColors($event, $event.target.selectedIndex)">
+                    <option v-for="color in colors">{{color.primary}}/{{color.secondary}}</option>
+                </select>             
+            </div>    
         </fieldset>
         <div id="grid">
             <fieldset :class="getColorClass" style="background-color:rgba(255,255,255,.825)!important">
                 <legend :class="getColorClass">Grid</legend>     
                 <div class="getColorClass row grid">
-                    <div v-for="number in gridNum" class="col-sm-1 offset-sm-1 grid-item" :style="{backgroundColor: number.hilite ? 'orange' : '#fff'}">{{ number.id }}</div>
+                    <div v-for="number in gridNum" class="col-sm-1 offset-sm-1 grid-item" :class="getColorClass" :style="getColorStyle(number)">{{ number.id }}</div>
                 </div>
             </fieldset>   
         </div>
