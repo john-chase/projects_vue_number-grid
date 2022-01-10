@@ -8,9 +8,42 @@ const app = Vue.createApp({
       return {
         //array of number objects {id: int, hilight: bool}
         gridNum: [],
+        //
         sequence: 0,
-        docs: ''
+        //
+        docs: '',
+        //available colors
+        colors: [
+          {primary: 'orange', secondary: 'hotpink'},
+          {primary: 'dodgerblue', secondary: 'purple'},
+          {primary: 'atlantis',secondary: 'lime'},
+          {primary: 'sand', secondary: 'tortilla'},
+          {primary: 'aqua', secondary: 'teal'},
+          {primary: 'burgundy', secondary: 'gold'},
+        ],
+        //color selector index
+        selectedIndex: '0'
       };
+    },
+    computed: {
+      getColorClass() {
+        switch (this.selectedIndex) {
+          case 1: return 'color1'
+          break
+          case 2: return 'color2'
+          break
+          case 3: return 'color3'
+          break
+          case 4: return 'color4'
+          break
+          case 5: return 'color5'
+          break
+          case 6: return 'color6'
+          break
+          default: ''
+          break
+        }
+      }
     },
     methods: { 
       initGrid() {
@@ -142,21 +175,33 @@ const app = Vue.createApp({
         }          
         if(DEBUG) console.log()
       },    
-      showDocs(){
-        const docs=`
-        <p>This application is constructed with basic Vue.js without the help of a CLI.<br/> 
-        Use the Operations buttons to highlight or display results in the number grid.<br/>
-        <ul>
-          <li>Square: Highlights perfect squares (numbers that give a whole square root).</li>
-          <li>Prime: Highlights primes (numbers that have only 2 factors: 1 and themselves).</li>
-          <li>Fibonacci: Highlights Fibonicci's numbers (Given the next number is found by adding up the two numbers before it).</li>
-          <li>Ordinal: Displays numbers in ordinal notation (Nst, Nnd, Nrd, etc).</li>
-          <li>Roman: Displays numbers in roman format (I, II, III, etc).</li>
-          <li>Sequence: Select a number to highlight a range of ordered numbers linked by addition.</li>
-        <ul>
-        `        
-        console.log(docs)     
-      }    
+      showDocs(displayed){
+        if(!displayed) {
+          const docs=`
+          <fieldset>
+            <legendDocumentation</legend>
+            <p>This application is constructed with basic Vue.js without the help of a CLI.<br/> 
+            Use the Operations buttons to highlight or display results in the number grid.<br/>
+            <ul>
+              <li>Square: Highlights perfect squares (numbers that give a whole square root).</li>
+              <li>Prime: Highlights primes (numbers that have only 2 factors: 1 and themselves).</li>
+              <li>Fibonacci: Highlights Fibonicci's numbers (Given the next number is found by adding up the two numbers before it).</li>
+              <li>Ordinal: Displays numbers in ordinal notation (Nst, Nnd, Nrd, etc).</li>
+              <li>Roman: Displays numbers in roman format (I, II, III, etc).</li>
+              <li>Sequence: Select a number to highlight a range of ordered numbers linked by addition.</li>
+            <ul>
+          </fieldset>
+          `        
+          this.docs=docs
+        } else {
+          this.docs=''
+        }
+      },
+      changeColors(event, selected){
+        console.log("Sel="+selected) 
+        this.selectedIndex=selected
+        console.log(this.colors[this.selectedIndex-1].primary+'/'+this.colors[this.selectedIndex-1].secondary)
+      } 
     },
     //create a watcher to update docs div style when showDocs is clicked
     created() {
