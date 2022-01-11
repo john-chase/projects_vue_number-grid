@@ -18,12 +18,12 @@ const app = Vue.createApp({
         //available colors
         colors: [
           {index: 0, primary: 'Silver', secondary: 'Black', tertiary: 'black'},
-          {index: 1, primary: 'Orange', secondary: 'Hot Pink', tertiary: 'black'},
-          {index: 2, primary: 'Dodger Blue', secondary: 'Purple', tertiary: 'white'},
-          {index: 3, primary: 'Pale Green',secondary: 'Lime', tertiary: 'black'},
-          {index: 4, primary: 'Tan', secondary: 'Dark Goldenrod', tertiary: 'black'},
+          {index: 1, primary: 'Orange', secondary: 'HotPink', tertiary: 'black'},
+          {index: 2, primary: 'DodgerBlue', secondary: 'Purple', tertiary: 'white'},
+          {index: 3, primary: 'PaleGreen',secondary: 'Lime', tertiary: 'black'},
+          {index: 4, primary: 'Tan', secondary: 'DarkGoldenrod', tertiary: 'black'},
           {index: 5, primary: 'Aqua', secondary: 'Teal', tertiary: 'black'},
-          {index: 6, primary: 'Fire Brick', secondary: 'Gold', tertiary: 'white'},
+          {index: 6, primary: 'FireBrick', secondary: 'Gold', tertiary: 'white'},
         ],
       };
     },
