@@ -1,7 +1,7 @@
 /*elements*/
 body{font-family:'Roboto',sans-serif;font-size:1em;background-color:#000;}
 header{display:table;width:100%;background-color:#000;display:flex;align-items:center;justify-content:center;}
-h1{font-family:'Fugaz One',sans-serif;padding-top:20px;text-align:center;color:silver;font-weight:bold;font-size:2.5em;margin:1rem 0 2rem 0;text-shadow:2px 2px #000;display:table-cell;vertical-align:middle;}
+h1{font-family:'Fugaz One',sans-serif;padding-top:20px;text-align:center;color:silver;font-weight:bold;font-size:2.5em;margin:1rem 0 2rem 0;text-shadow:2px 2px #fff;display:table-cell;vertical-align:middle;}
 fieldset{margin:0 4rem 1rem;background-color:#FFF;border:2px solid #000}
 legend{font-size:1.25em;font-weight:100;background-color:#fff;border-radius:8px;padding:0px 24px 3px 6px;color:#000;border:2px solid #000;text-shadow:1px 1px silver;}
 input,select,textarea,button{font-family:inherit;font-size:inherit;background-color:silver;margin:4px;padding-top:2px;border:none;border-bottom:solid 3px #000;vertical-align:top;}
@@ -9,10 +9,9 @@ button{height:27px;}
 select{width:184px;height:27px;padding:2px 6px;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Ctitle%3Edown-arrow%3C%2Ftitle%3E%3Cg%20fill%3D%22%23000000%22%3E%3Cpath%20d%3D%22M10.293%2C3.293%2C6%2C7.586%2C1.707%2C3.293A1%2C1%2C0%2C0%2C0%2C.293%2C4.707l5%2C5a1%2C1%2C0%2C0%2C0%2C1.414%2C0l5-5a1%2C1%2C0%2C1%2C0-1.414-1.414Z%22%20fill%3D%22%23000000%22%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E");background-size:.75em;background-position:calc(100% - .5em)center;background-repeat:no-repeat;}
 
 /*ids*/
-#app{margin:1rem 0;padding-bottom:0em;background:url("../images/numbers-bg-1920.jpg") top / 45% repeat;}
+#app{margin:1rem 0;padding-bottom:0em;background:url("../images/numbers-bg-1920.jpg")top/45% repeat;}
 
 /*classes*/
-logo{text-align:center;}
 .trans-top,.trans-bottom{height:30px;}
 .trans-top{background:linear-gradient(180deg,rgba(0,0,0,1)0%,rgba(0,212,255,0)100%);}
 .trans-bottom{background:linear-gradient(0deg,rgba(0,0,0,1)0%,rgba(0,212,255,0)100%);}
@@ -25,7 +24,7 @@ logo{text-align:center;}
 .show{display:inline;}
 
 /*color options*/
-h1.color0{color:silver!important;text-shadow:2px 2px black!important;}
+h1.color0{color:silver!important;text-shadow:2px 2px white!important;}
 fieldset.color0,legend.color0,.color0 .grid-item{border:2px solid black!important;}
 legend.color0 {color:silver!important;text-shadow:1px 1px black;}
 .color0 select,.color0 button{color:#000;background-color:silver!important;border-bottom:solid 3px black!important;}

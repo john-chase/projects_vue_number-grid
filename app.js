@@ -6,6 +6,7 @@ const TABLE=false
 const app = Vue.createApp({
     data() {
       return {
+        test:true,
         //array of number objects {id: int, hilight: bool}
         gridNum: [],
         // sequence selector index
