@@ -1,4 +1,4 @@
-body{font-family:'Roboto',sans-serif;font-size:1em;}
+body{font-family:'Roboto',sans-serif;font-size:1em;background-color:#000;}
 header{display:table;width:100%;background-color:#000;}
 h1{font-family:'Fugaz One',sans-serif;padding-top:20px;text-align:center;color:silver;font-weight:bold;font-size:2.5em;margin:1rem 0;text-shadow: 2px 2px #000;display:table-cell;vertical-align:middle;}
 .trans-top,.trans-bottom{height:30px;}
