@@ -43,7 +43,7 @@
             <div class="right"><button @click="showDocs(docs)">{{docs?'Hide':'Show'}} Docs</button></div>
             <div class="right">
                 <select name="colors" @change="changeColors($event, $event.target.selectedIndex)" v-model="colorIndex">>
-                    <option value="-1">Colors</option>
+                    <option value="-1">Choose colors...</option>
                     <option v-for="color in colors" :value="color.index">{{color.primary}}/{{color.secondary}}</option>
                 </select>             
             </div>    

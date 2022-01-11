@@ -11,19 +11,19 @@ const app = Vue.createApp({
         // sequence selector index
         sequenceIndex: 0,
         //color selector index
-        colorIndex: -1,
+        colorIndex: 0,
         //placeholder for documentation - controls display on/off
         docs: '',
         docuLegend: '',
         //available colors
         colors: [
-          {index: 0, primary: 'silver', secondary: 'black', tertiary: 'black'},
-          {index: 1, primary: 'orange', secondary: 'hotpink', tertiary: 'black'},
-          {index: 2, primary: 'dodgerblue', secondary: 'purple', tertiary: 'white'},
-          {index: 3, primary: 'palegreen',secondary: 'lime', tertiary: 'black'},
-          {index: 4, primary: 'tan', secondary: 'darkgoldenrod', tertiary: 'black'},
-          {index: 5, primary: 'aqua', secondary: 'teal', tertiary: 'black'},
-          {index: 6, primary: 'firebrick', secondary: 'gold', tertiary: 'white'},
+          {index: 0, primary: 'Silver', secondary: 'Black', tertiary: 'black'},
+          {index: 1, primary: 'Orange', secondary: 'Hot Pink', tertiary: 'black'},
+          {index: 2, primary: 'Dodger Blue', secondary: 'Purple', tertiary: 'white'},
+          {index: 3, primary: 'Pale Green',secondary: 'Lime', tertiary: 'black'},
+          {index: 4, primary: 'Tan', secondary: 'Dark Goldenrod', tertiary: 'black'},
+          {index: 5, primary: 'Aqua', secondary: 'Teal', tertiary: 'black'},
+          {index: 6, primary: 'Fire Brick', secondary: 'Gold', tertiary: 'white'},
         ],
       };
     },
@@ -72,6 +72,10 @@ const app = Vue.createApp({
         if(!colorPreserve) {
           this.colorIndex='0'
           this.changeColors('',1)
+        } else {
+          if(this.colorIndex===-1) {
+            alert('Please choose a color!')
+          }
         }   
         if(!docPreserve) {
           this.docs=''
@@ -219,7 +223,6 @@ const app = Vue.createApp({
       },
       getColorStyle(num) {
         if(DEBUG) console.log("colorIndex: "+this.colorIndex+ ", num: "+JSON.stringify(num), num.hilite ? 'silver' : '#fff')
-        console.log(this.colorIndex)
         if(num.hilite && this.colorIndex>0) {
           return 'background-color:'+this.colors[this.colorIndex].primary+';color:'+this.colors[this.colorIndex].tertiary
         } else if(num.hilite && this.colorIndex===0) {
