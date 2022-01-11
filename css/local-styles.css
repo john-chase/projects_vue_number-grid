@@ -1,7 +1,7 @@
 /*elements*/
 body{font-family:'Roboto',sans-serif;font-size:1em;background-color:#000;}
-header{display:table;width:100%;background-color:#000;}
-h1{font-family:'Fugaz One',sans-serif;padding-top:20px;text-align:center;color:silver;font-weight:bold;font-size:2.5em;margin:1rem 0;text-shadow:2px 2px #000;display:table-cell;vertical-align:middle;}
+header{display:table;width:100%;background-color:#000;display:flex;align-items:center;justify-content:center;}
+h1{font-family:'Fugaz One',sans-serif;padding-top:20px;text-align:center;color:silver;font-weight:bold;font-size:2.5em;margin:1rem 0 2rem 0;text-shadow:2px 2px #000;display:table-cell;vertical-align:middle;}
 fieldset{margin:0 4rem 1rem;background-color:#FFF;border:2px solid #000}
 legend{font-size:1.25em;font-weight:100;background-color:#fff;border-radius:8px;padding:0px 24px 3px 6px;color:#000;border:2px solid #000;text-shadow:1px 1px silver;}
 input,select,textarea,button{font-family:inherit;font-size:inherit;background-color:silver;margin:4px;padding-top:2px;border:none;border-bottom:solid 3px #000;vertical-align:top;}
@@ -12,6 +12,7 @@ select{width:184px;height:27px;padding:2px 6px;-webkit-appearance:none;-moz-appe
 #app{margin:1rem 0;padding-bottom:0em;background:url("../images/numbers-bg-1920.jpg") top / 45% repeat;}
 
 /*classes*/
+logo{text-align:center;}
 .trans-top,.trans-bottom{height:30px;}
 .trans-top{background:linear-gradient(180deg,rgba(0,0,0,1)0%,rgba(0,212,255,0)100%);}
 .trans-bottom{background:linear-gradient(0deg,rgba(0,0,0,1)0%,rgba(0,212,255,0)100%);}
@@ -61,6 +62,6 @@ legend.color6{color:#B22222!important;text-shadow:1px 1px #FFCF40;}
 
 /*queries*/
 @media(max-width:1047px){.grid-item{flex-basis:8.5%;height:45px}.left{float:none;}.right{float:none;}button,select{width:100%!important;text-align:left;}}        
-@media(max-width:714px){.grid-item{flex-basis:8%;height:30px;font-size:x-small!important}h1{margin:1.5rem 0;font-size:2rem;}}
+@media(max-width:714px){.grid-item{flex-basis:8%;height:30px;font-size:x-small!important}h1{margin:1.5rem 0 2.5rem 0;font-size:2rem;}}
 @media(max-width:547px){.grid-item{flex-basis:7.5%;}}        
 @media(max-width:447px){.grid-item{flex-basis:14.5%;}}
