@@ -14,6 +14,7 @@ const app = Vue.createApp({
         colorIndex: -1,
         //placeholder for documentation - controls display on/off
         docs: '',
+        docuLegend: '',
         //available colors
         colors: [
           {index: 0, primary: 'silver', secondary: 'black', tertiary: 'black'},
@@ -28,7 +29,7 @@ const app = Vue.createApp({
     },
     computed: {
       getColorClass() {
-        if(!DEBUG) console.log(this.colorIndex)
+        if(DEBUG) console.log(this.colorIndex)
         switch (this.colorIndex) {
           case 1: return 'color1'
           break
@@ -58,7 +59,8 @@ const app = Vue.createApp({
         this.gridNum = grid
       },
       //prepare grid for next operation
-      reset(seqPreserve=false,colorPreserve=true) { console.warn(seqPreserve,colorPreserve)
+      reset(seqPreserve=false,colorPreserve=true,docPreserve=true) { 
+        if(WARN) console.warn(seqPreserve,colorPreserve,docPreserve)
         for(num in this.gridNum) {
           let currentNum=parseInt(num)
           this.gridNum[num].id=currentNum+1 //make sure the id isnt a string from ordinalizing      
@@ -70,8 +72,10 @@ const app = Vue.createApp({
         if(!colorPreserve) {
           this.colorIndex='0'
           this.changeColors('',1)
-        }        
-        this.docs=''
+        }   
+        if(!docPreserve) {
+          this.docs=''
+        }              
         if(TABLE) console.table(this.gridNum[num].id)
       },
       //return prime numbers from 1 to num
@@ -184,10 +188,9 @@ const app = Vue.createApp({
       },    
       showDocs(displayed){
         if(!displayed) {
+          this.docuLegend='Documentation'
           const docs=`
-          <fieldset>
-            <legend :class="getColorClass">Documentation</legend>
-            <p>This application is constructed with basic Vue.js without the help of a CLI.<br/> 
+            This application is constructed with basic Vue.js without the help of a CLI.<br/> 
             Use the Operations buttons to highlight or display results in the number grid.<br/>
             <ul>
               <li>Square: Highlights perfect squares (numbers that give a whole square root).</li>
@@ -203,7 +206,6 @@ const app = Vue.createApp({
               <li>Show/Hide docs: Toggles this section display.
               <li>Reset: Brings application back to starting status.</li>
             <ul>            
-          </fieldset>
           `        
           this.docs=docs
         } else {
@@ -211,9 +213,9 @@ const app = Vue.createApp({
         }
       },
       changeColors(event, selected){
-        if(!DEBUG) console.log("Sel="+selected) 
+        if(DEBUG) console.log("Sel="+selected) 
         this.colorIndex=selected-1
-        if(!DEBUG) console.log(this.colors[this.colorIndex].primary+'/'+this.colors[this.colorIndex].secondary)
+        if(DEBUG) console.log(this.colors[this.colorIndex].primary+'/'+this.colors[this.colorIndex].secondary)
       },
       getColorStyle(num) {
         if(DEBUG) console.log("colorIndex: "+this.colorIndex+ ", num: "+JSON.stringify(num), num.hilite ? 'silver' : '#fff')

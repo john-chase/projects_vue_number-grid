@@ -33,6 +33,8 @@ select {
     background-repeat:no-repeat;
 }
 select::-ms-expand {display: none;}
+.hide{display:none;}
+.show{display:inline;}
 /*color options*/
 h1.color0{color:silver!important;text-shadow: 2px 2px black!important;}
 fieldset.color0,legend.color0,.color0 .grid-item{border:2px solid black!important;}

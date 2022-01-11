@@ -19,7 +19,12 @@
             <h1 :class="getColorClass">Magic Number Grid</h1>
         </header>
         <div class="trans-top"></div>
-        <div v-html="docs"></div>
+        <div id="doc-div" class="hide" :class="{show: docs}">
+            <fieldset :class="getColorClass">
+                <legend :class="getColorClass">{{ docuLegend }}</legend>
+                <p v-html="docs"></p>
+            </fieldset>
+        </div>
         <fieldset :class="getColorClass" style="background-color:rgba(255,255,255,.65)!important">
             <legend :class="getColorClass">Operations</legend> 
             <div class="ops-container">          
@@ -34,7 +39,7 @@
                     <option v-for="i in 10" :key="i">{{i}}</option>
                 </select>   
             </div>
-            <div class="right"><button @click="reset(false,false)">Reset</button></div>
+            <div class="right"><button @click="reset(false,false,false)">Reset</button></div>
             <div class="right"><button @click="showDocs(docs)">{{docs?'Hide':'Show'}} Docs</button></div>
             <div class="right">
                 <select name="colors" @change="changeColors($event, $event.target.selectedIndex)" v-model="colorIndex">>
