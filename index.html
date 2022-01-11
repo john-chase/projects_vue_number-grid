@@ -18,9 +18,9 @@
         <header>
             <h1 :class="getColorClass">Magic Number Grid</h1>
         </header>
-        <div v-html="docs"></div>
         <div class="trans-top"></div>
-        <fieldset :class="getColorClass" style="background-color:rgba(255,255,255,.825)!important">
+        <div v-html="docs"></div>
+        <fieldset :class="getColorClass" style="background-color:rgba(255,255,255,.65)!important">
             <legend :class="getColorClass">Operations</legend> 
             <div class="ops-container">          
             <div class="left" :class="getColorClass">
@@ -44,7 +44,7 @@
             </div>    
         </fieldset>
         <div id="grid">
-            <fieldset :class="getColorClass" style="background-color:rgba(255,255,255,.825)!important">
+            <fieldset :class="getColorClass" style="background-color:rgba(255,255,255,.65)!important">
                 <legend :class="getColorClass">Grid</legend>     
                 <div class="getColorClass row grid">
                     <div v-for="number in gridNum" class="col-sm-1 offset-sm-1 grid-item" :class="getColorClass" style="background-color:silver" :style="getColorStyle(number)">{{ number.id }}</div>

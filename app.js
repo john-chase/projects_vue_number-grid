@@ -186,7 +186,7 @@ const app = Vue.createApp({
         if(!displayed) {
           const docs=`
           <fieldset>
-            <legendDocumentation</legend>
+            <legend :class="getColorClass">Documentation</legend>
             <p>This application is constructed with basic Vue.js without the help of a CLI.<br/> 
             Use the Operations buttons to highlight or display results in the number grid.<br/>
             <ul>
