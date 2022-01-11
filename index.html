@@ -29,7 +29,7 @@
                 <button @click="showFibos(10)">Fibonacci</button>      
                 <button @click="showOrdinals()">Ordinal</button>      
                 <button @click="showRoman()">Roman</button>  
-                <select name="sequence" id="sequence" @change="showSequence()" v-model="sequence">
+                <select name="sequence" id="sequence" @change="showSequence()" v-model="sequenceIndex">
                     <option value="0">Sequence</option>
                     <option v-for="i in 10" :key="i">{{i}}</option>
                 </select>   
@@ -37,9 +37,9 @@
             <div class="right"><button @click="reset(false,false)">Reset</button></div>
             <div class="right"><button @click="showDocs(docs)">{{docs?'Hide':'Show'}} Docs</button></div>
             <div class="right">
-                <select name="colors" @change="changeColors($event, $event.target.selectedIndex)">
-                    <option value="0">Colors</option>
-                    <option v-for="color in colors">{{color.primary}}/{{color.secondary}}</option>
+                <select name="colors" @change="changeColors($event, $event.target.selectedIndex)" v-model="colorIndex">>
+                    <option value="-1">Colors</option>
+                    <option v-for="color in colors" :value="color.index">{{color.primary}}/{{color.secondary}}</option>
                 </select>             
             </div>    
         </fieldset>

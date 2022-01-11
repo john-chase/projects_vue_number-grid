@@ -8,27 +8,28 @@ const app = Vue.createApp({
       return {
         //array of number objects {id: int, hilight: bool}
         gridNum: [],
-        //
-        sequence: 0,
-        //
+        // sequence selector index
+        sequenceIndex: 0,
+        //color selector index
+        colorIndex: -1,
+        //placeholder for documentation - controls display on/off
         docs: '',
         //available colors
         colors: [
-          {primary: 'orange', secondary: 'hotpink', tertiary: 'black'},
-          {primary: 'dodgerblue', secondary: 'purple', tertiary: 'white'},
-          {primary: 'palegreen',secondary: 'lime', tertiary: 'black'},
-          {primary: 'tan', secondary: 'darkgoldenrod', tertiary: 'black'},
-          {primary: 'aqua', secondary: 'teal', tertiary: 'black'},
-          {primary: 'firebrick', secondary: 'gold', tertiary: 'white'},
+          {index: 0, primary: 'silver', secondary: 'black', tertiary: 'black'},
+          {index: 1, primary: 'orange', secondary: 'hotpink', tertiary: 'black'},
+          {index: 2, primary: 'dodgerblue', secondary: 'purple', tertiary: 'white'},
+          {index: 3, primary: 'palegreen',secondary: 'lime', tertiary: 'black'},
+          {index: 4, primary: 'tan', secondary: 'darkgoldenrod', tertiary: 'black'},
+          {index: 5, primary: 'aqua', secondary: 'teal', tertiary: 'black'},
+          {index: 6, primary: 'firebrick', secondary: 'gold', tertiary: 'white'},
         ],
-        //color selector index
-        index: '0'
       };
     },
     computed: {
       getColorClass() {
-        if(DEBUG) console.log(this.index)
-        switch (this.index+1) {
+        if(!DEBUG) console.log(this.colorIndex)
+        switch (this.colorIndex) {
           case 1: return 'color1'
           break
           case 2: return 'color2'
@@ -41,9 +42,7 @@ const app = Vue.createApp({
           break
           case 6: return 'color6'
           break
-          case 7: return 'color7'
-          break
-          default: return 'color1'
+          default: return 'color0'
           break
         }
       }
@@ -59,17 +58,18 @@ const app = Vue.createApp({
         this.gridNum = grid
       },
       //prepare grid for next operation
-      reset(seqPreserve=false,colorPreserve=true) { //console.warn(seqPreserve,colorPreserve)
+      reset(seqPreserve=false,colorPreserve=true) { console.warn(seqPreserve,colorPreserve)
         for(num in this.gridNum) {
           let currentNum=parseInt(num)
           this.gridNum[num].id=currentNum+1 //make sure the id isnt a string from ordinalizing      
           this.gridNum[num].hilite=false //reset hilighted items     
         }
         if(!seqPreserve) {
-          this.sequence=0
+          this.sequenceIndex=0
         }
         if(!colorPreserve) {
-          this.index='0'
+          this.colorIndex='0'
+          this.changeColors('',1)
         }        
         this.docs=''
         if(TABLE) console.table(this.gridNum[num].id)
@@ -163,9 +163,9 @@ const app = Vue.createApp({
         }
       },
       showSequence() {
-        this.reset(true) //preserve sequence          
+        this.reset(true) //preserve index          
         for(num in this.gridNum) {
-          if(this.gridNum[num].id%this.sequence===0) {
+          if(this.gridNum[num].id%this.sequenceIndex===0) {
             this.gridNum[num].hilite=true
           }
         }
@@ -196,7 +196,13 @@ const app = Vue.createApp({
               <li>Ordinal: Displays numbers in ordinal notation (Nst, Nnd, Nrd, etc).</li>
               <li>Roman: Displays numbers in roman format (I, II, III, etc).</li>
               <li>Sequence: Select a number to highlight a range of ordered numbers linked by addition.</li>
+            </ul>
+            <hr>
             <ul>
+              <li>Colors: Select a color combination to update display style.</li>
+              <li>Show/Hide docs: Toggles this section display.
+              <li>Reset: Brings application back to starting status.</li>
+            <ul>            
           </fieldset>
           `        
           this.docs=docs
@@ -205,15 +211,16 @@ const app = Vue.createApp({
         }
       },
       changeColors(event, selected){
-        if(DEBUG) console.log("Sel="+selected) 
-        this.index=selected
-        if(DEBUG) console.log(this.colors[this.index].primary+'/'+this.colors[this.index].secondary)
+        if(!DEBUG) console.log("Sel="+selected) 
+        this.colorIndex=selected-1
+        if(!DEBUG) console.log(this.colors[this.colorIndex].primary+'/'+this.colors[this.colorIndex].secondary)
       },
       getColorStyle(num) {
-        if(!DEBUG) console.log("index: "+this.index+ ", num: "+JSON.stringify(num), num.hilite ? 'silver' : '#fff')
-        if(num.hilite && this.index>0) {
-          return 'background-color:'+this.colors[this.index-1].primary+';color:'+this.colors[this.index-1].tertiary
-        } else if(num.hilite && this.index===0) {
+        if(DEBUG) console.log("colorIndex: "+this.colorIndex+ ", num: "+JSON.stringify(num), num.hilite ? 'silver' : '#fff')
+        console.log(this.colorIndex)
+        if(num.hilite && this.colorIndex>0) {
+          return 'background-color:'+this.colors[this.colorIndex].primary+';color:'+this.colors[this.colorIndex].tertiary
+        } else if(num.hilite && this.colorIndex===0) {
           return 'background-color:silver;color:black'
         } else {
            return 'background-color:white;color:black'
