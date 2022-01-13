@@ -22,6 +22,11 @@ select{width:184px;height:27px;padding:2px 6px;-webkit-appearance:none;-moz-appe
 .grid-item{display:flex;align-items:center;justify-content:space-around;margin:4px;border:2px solid #000;border-radius:8px;text-align:center;height:60px;flex-basis:9%;}
 .hide{display:none;}
 .show{display:inline;}
+.bc-div{margin-top:-2rem;padding:0 0 .5rem 0;background-color:#000;}
+.breadcrumbs {margin:0 0 1.5rem 4rem;padding:0;color:#2d8bf0;background-color:#000!important;}
+.breadcrumbs li{display:inline;}
+.breadcrumbs a{color:#1674D9;text-decoration:none;}
+.breadcrumbs a:hover{color:#fff;text-decoration:underline;}
 
 /*color options*/
 h1.color0{color:silver!important;text-shadow:2px 2px white!important;}

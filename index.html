@@ -18,15 +18,20 @@ TO DO:
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Paytone+One&family=Russo+One&family=Fugaz+One&family=Roboto&display=swap" rel="stylesheet">
-    <link href="/projects/css/reset.css" rel="stylesheet">   
     <link href="css/local-styles.css" rel="stylesheet">   
 </head>
 <body>
-    <div id="app">
+    <div id="app">            
         <header>
-            <img src="../site-images/logo-325.png" width="60" height="60" alt="Art of Tech Business logo">
+            <img src="/projects/site-images/logo-325.png" width="60" height="60" alt="Art of Tech Business logo">
             <h1 :class="getColorClass">Magic Number Grid</h1>
-        </header>
+        </header>            
+        <div class="bc-div">
+            <ul class="breadcrumbs">
+                <li></li><a href="/">Home</a></li>
+                <li> | <a href="/projects/index.html">Projects</a></li>
+            </ul>
+        </div>
         <div class="trans-top"></div>
         <div id="doc-div" class="hide" :class="{show: docs}">
             <fieldset :class="getColorClass">
