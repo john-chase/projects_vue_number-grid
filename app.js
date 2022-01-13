@@ -210,7 +210,11 @@ const app = Vue.createApp({
               <li>Colors: Select a color combination to update display style.</li>
               <li>Show/Hide docs: Toggles this section display.
               <li>Reset: Brings application back to starting status.</li>
-            <ul>            
+            </ul>    
+            <hr>
+            <ul>
+              <li>Hey, can we <a href="../number-grid-no-bg/index.html">get rid of the background image</a>?</li>
+            </ul>        
           `        
           this.docs=docs
         } else {
