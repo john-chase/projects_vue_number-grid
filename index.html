@@ -17,23 +17,14 @@ TO DO:
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Paytone+One&family=Russo+One&family=Fugaz+One&family=Roboto&display=swap" rel="stylesheet">
+    <link href="/PROJECTS/css/global-styles.css" rel="stylesheet">   
     <link href="css/local-styles.css" rel="stylesheet">   
     <script src="https://unpkg.com/vue@next" defer></script>
     <script src="app.js" defer></script>    
 </head>
 <body>
     <div id="app">            
-        <header>
-            <img id="logo" src="../../site-images/logo-325.png" width="60" height="60" alt="Art of Tech Business logo">
-            <h1 :class="getColorClass">Magic Number Grid</h1>
-        </header>            
-        <div :class="getColorClass" class="bc-div">
-            <ul class="breadcrumbs">
-                <li></li><a href="//theartoftechllc.com">Home</a></li>
-                <li> | <a href="/">Projects</a></li>
-            </ul>
-        </div>
-        <div class="trans-top"></div>
+        <!--#include virtual="/PROJECTS/includes/header.html"--> 
         <div id="doc-div" class="hide" :class="{show: docs}">
             <fieldset :class="getColorClass">
                 <legend :class="getColorClass">{{ docuLegend }}</legend>
@@ -72,24 +63,6 @@ TO DO:
             </fieldset>   
         </div>
     </div>
-    <footer id="cir-footer-wrapper">
-        <div id="cir-footer-menu">
-            <ul id="footer-menu" class="menu">
-                <li id="menu-item-24" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-24">
-                    <a target="_blank" href="https://theartoftechllc.com">Home</a>
-                </li>
-                <li id="menu-item-24" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-24">
-                    <a target="_blank" href="https://twitter.com/artoftechllc">Twitter</a>
-                </li>
-                <li id="menu-item-303" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-303">
-                    <a target="_blank" href="https://www.linkedin.com/company/the-art-of-tech-llc-/">LinkedIn</a>
-                </li>
-                <li id="menu-item-26" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-26">
-                    <a target="_blank" href="mailto:info@theartoftechllc.com">Email</a>
-                </li>
-            </ul>
-            <div class="copyright"> Copyright © 2022 The Art of Tech, LLC. All rights reserved.</div>
-        </div>
-    </footer>    
+    <!--#include virtual="/PROJECTS/includes/footer.html"-->  
 </body>
 </html>
