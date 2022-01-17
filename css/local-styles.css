@@ -30,7 +30,7 @@ select{width:184px;height:27px;padding:2px 6px;-webkit-appearance:none;-moz-appe
 .hide{display:none;}
 .show{display:inline;}
 .bc-div{border:1px solid white;background-color:#d6d5d5;margin:-5rem 4rem 0 4rem;padding:0 0 .5rem 0;}/*background: linear-gradient(270deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 100%);*/
-.breadcrumbs {margin: 0 0 .5rem 4rem;padding: 1rem 0 0 0;color:dodgerblue;}
+.breadcrumbs {margin: 0 0 .5rem .75rem;padding: 1rem 0 0 0;color:dodgerblue;}
 .breadcrumbs li{display:inline;}
 .breadcrumbs a{color:dodgerblue;text-decoration:none;}
 .breadcrumbs a:hover{color:#fff;text-decoration:underline;}
