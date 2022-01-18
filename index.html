@@ -17,14 +17,14 @@ TO DO:
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Paytone+One&family=Russo+One&family=Fugaz+One&family=Roboto&display=swap" rel="stylesheet">
-    <link href="/PROJECTS/css/global-styles.css" rel="stylesheet">   
+    <link href="/css/global-styles.css" rel="stylesheet">   
     <link href="css/local-styles.css" rel="stylesheet">   
     <script src="https://unpkg.com/vue@next" defer></script>
     <script src="app.js" defer></script>    
 </head>
 <body>
     <div id="app">            
-        <!--#include virtual="/PROJECTS/includes/header.html"--> 
+        <!--#include virtual="/includes/header.html"--> 
         <div id="doc-div" class="hide" :class="{show: docs}">
             <fieldset :class="getColorClass">
                 <legend :class="getColorClass">{{ docuLegend }}</legend>
@@ -63,6 +63,6 @@ TO DO:
             </fieldset>   
         </div>
     </div>
-    <!--#include virtual="/PROJECTS/includes/footer.html"-->  
+    <!--#include virtual="/includes/footer.html"-->  
 </body>
 </html>
