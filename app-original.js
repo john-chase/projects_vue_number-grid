@@ -6,26 +6,11 @@ const TABLE=false
 const app = Vue.createApp({
     data() {
       return {
-        //elements that show up depending on ops selection
-        repeatRand: false,
-        clearRand: false,
-        getSequence:false,
+        test:true,
         //array of number objects {id: int, hilight: bool}
         gridNum: [],
         // sequence selector index
         sequenceIndex: 0,
-        // operations selector index
-        opsIndex: -1,
-        //available ops
-        ops: [
-          {index: 0, operation: 'Square', func: 'this.showSquares()'},
-          {index: 1, operation: 'Prime', func: 'this.showPrimes()'},
-          {index: 2, operation: 'Ordinal', func: 'this.showOrdinals()'},
-          {index: 3, operation: 'Fibonacci', func: 'this.showFibos(10)'},
-          {index: 4, operation: 'Roman', func: 'this.showRoman()'},
-          {index: 5, operation: 'Random', func: 'this.showRandom()'},
-          {index: 6, operation: 'Sequence', func: 'this.showSequence()'},
-        ],
         //color selector index
         colorIndex: 0,
         //placeholder for documentation - controls display on/off
@@ -62,18 +47,9 @@ const app = Vue.createApp({
           default: return 'color0'
           break
         }
-      },
-      getRandDisplay() {
-        return this.repeatRand ? "show" : "hide"
-      },
-      setRandDisplay() {
-        return this.clearRand ? "show" : "hide"
-      },
-      getSeqDisplay() {
-        return this.getSequence ? "show" : "hide"
       }
     },
-    methods: {
+    methods: { 
       initGrid() {
         //populate grid with loop at creation
         let grid=new Array(100)
@@ -84,15 +60,12 @@ const app = Vue.createApp({
         this.gridNum = grid
       },
       //prepare grid for next operation
-      reset(seqPreserve=false,colorPreserve=true,docPreserve=true,opsPreserve=false) {
+      reset(seqPreserve=false,colorPreserve=true,docPreserve=true) { 
         if(WARN) console.warn(seqPreserve,colorPreserve,docPreserve)
         for(num in this.gridNum) {
           let currentNum=parseInt(num)
-          this.gridNum[num].id=currentNum+1 //make sure the id isnt a string from ordinalizing
-          this.gridNum[num].hilite=false //reset hilighted items
-        }
-        if(!opsPreserve) {
-          this.opsIndex=-1
+          this.gridNum[num].id=currentNum+1 //make sure the id isnt a string from ordinalizing      
+          this.gridNum[num].hilite=false //reset hilighted items     
         }
         if(!seqPreserve) {
           this.sequenceIndex=0
@@ -104,27 +77,17 @@ const app = Vue.createApp({
           if(this.colorIndex===-1) {
             alert('Please choose a color!')
           }
-        }
+        }   
         if(!docPreserve) {
           this.docs=''
-        }
-        this.repeatRand=false
-        this.getSequence=false
+        }              
         if(TABLE) console.table(this.gridNum[num].id)
-      },
-      //
-      showOps() {
-        this.reset(false,true,true,true)
-        if(DEBUG)console.log(this.opsIndex)
-        if(this.opsIndex>=0) {
-          if(DEBUG)console.log(this.ops[this.opsIndex].func)
-          eval(this.ops[this.opsIndex].func)
-        }
       },
       //return prime numbers from 1 to num
       getPrimes: (num)=>Array(num-1).fill().map((e,i)=>2+i).filter((e,i,a)=>a.slice(0,i).every(x=>e%x!==0)),
       showPrimes() {
         //highlight prime numbers
+        this.reset()
         if(DEBUG) console.debug(this.getPrimes(100))
         const primes = this.getPrimes(100)
         for(num in this.gridNum) {
@@ -137,6 +100,7 @@ const app = Vue.createApp({
       },
       showOrdinals() {
         //modify numbers to display ordinals
+        this.reset()
         for(num in this.gridNum) {
           if([0,4,5,6,7,8,9,11,12,13].includes(this.gridNum[num].id %10)) {
             this.gridNum[num].id+='th'
@@ -152,6 +116,7 @@ const app = Vue.createApp({
       showFibos(num) {
         // The next number is found by adding up the two numbers before it:
         // 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89
+        this.reset()        
         let a = 1, b = 0, temp;
         while (num >= 0){
           temp = a;
@@ -164,6 +129,7 @@ const app = Vue.createApp({
       },
       showRoman() {
         // Display the number in roman format I, II, III, etc
+        this.reset()        
         for(num in this.gridNum) {
           currentNum = this.gridNum[num].id
           roman=''
@@ -172,15 +138,15 @@ const app = Vue.createApp({
               roman+="X".repeat(currentNum/10)
             }
           } else if(currentNum >= 40 && currentNum <= 49) {
-            roman+="XL"
+            roman+="XL"          
           } else if(currentNum >= 50 && currentNum <= 89) {
-            roman+="L"
-            roman+="X".repeat((currentNum/10)-5)
+            roman+="L"    
+            roman+="X".repeat((currentNum/10)-5)      
           } else if(currentNum >= 90 && currentNum <= 99) {
-            roman+="XC"
+            roman+="XC"    
           } else if(currentNum === 100) {
             roman+="C"
-          }
+          }         
           switch(currentNum % 10) {
             case 1: roman+="I"
             break;
@@ -206,15 +172,15 @@ const app = Vue.createApp({
         }
       },
       showSequence() {
-        this.reset(true) //preserve index
+        this.reset(true) //preserve index          
         for(num in this.gridNum) {
           if(this.gridNum[num].id%this.sequenceIndex===0) {
             this.gridNum[num].hilite=true
           }
         }
-        this.getSequence=true
-      },
+      },  
       showSquares(){
+        this.reset()
         for(num in this.gridNum) {
           let currentNumber=this.gridNum[num].id
           let sqrt=Math.sqrt(currentNumber)
@@ -222,31 +188,14 @@ const app = Vue.createApp({
           if(sqrt%1===0) {
             this.gridNum[num].hilite=true
           }
-        }
-      },
-      showRandom(){
-        const rand=Math.floor(Math.random()*100)+1
-        for(num in this.gridNum) {
-          let currentNumber=this.gridNum[num].id
-          if(rand===currentNumber) {
-            this.gridNum[num].hilite=true
-          }
-        }
-        this.repeatRand=true
-        this.clearRand=true
-        if(DEBUG) console.log(rand)
-      },
-      hideRandom(){
-        for(num in this.gridNum) {
-          this.gridNum[num].hilite=false
-        }
-        if(DEBUG) console.log(rand)
-      },      
+        }          
+        if(DEBUG) console.log()
+      },    
       showDocs(displayed){
         if(!displayed) {
           this.docuLegend='Documentation'
           const docs=`
-            This application is constructed with basic Vue.js without the help of a CLI.<br/>
+            This application is constructed with basic Vue.js without the help of a CLI.<br/> 
             Use the Operations buttons to highlight or display results in the number grid.<br/>
             <ul>
               <li>Square: Highlights perfect squares (numbers that give a whole square root).</li>
@@ -261,19 +210,19 @@ const app = Vue.createApp({
               <li>Colors: Select a color combination to update display style.</li>
               <li>Show/Hide docs: Toggles this section display.
               <li>Reset: Brings application back to starting status.</li>
-            </ul>
+            </ul>    
             <hr>
             <ul>
               <li>Hey, can we <a href="../number-grid-no-bg/index.html">get rid of the background image</a>?</li>
-            </ul>
-          `
+            </ul>        
+          `        
           this.docs=docs
         } else {
           this.docs=''
         }
       },
       changeColors(event, selected){
-        if(DEBUG) console.log("Sel="+selected)
+        if(DEBUG) console.log("Sel="+selected) 
         this.colorIndex=selected-1
         if(DEBUG) console.log(this.colors[this.colorIndex].primary+'/'+this.colors[this.colorIndex].secondary)
       },
@@ -286,7 +235,7 @@ const app = Vue.createApp({
         } else {
            return 'background-color:white;color:black'
         }
-      }
+      } 
     },
     created() {
       this.initGrid();
