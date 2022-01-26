@@ -273,9 +273,11 @@ const app = Vue.createApp({
         if(!displayed) {
           this.docuLegend='Documentation'
           const docs=`
-            This application is constructed with basic Vue.js without the help of a CLI.<br/>
-            Use the Operations buttons to highlight or display results in the number grid.<br/>
-            <ul>
+            This application is constructed with basic Vue.js without the help of a CLI.<br/><br/>
+            Available Functions:<br/>
+            <hr/>
+            Choose Operation: select an operation to highlight or display results in the number grid.<br/>
+            <ul style="margin-left:-1rem;">
               <li>Square: Highlights perfect squares (numbers that give a whole square root).</li>
               <li>Prime: Highlights primes (numbers that have only 2 factors: 1 and themselves).</li>
               <li>Fibonacci: Highlights Fibonicci's numbers (Given the next number is found by adding up the two numbers before it).</li>
@@ -283,16 +285,11 @@ const app = Vue.createApp({
               <li>Roman: Displays numbers in roman format (I, II, III, etc).</li>
               <li>Sequence: Select a number to highlight a range of ordered numbers linked by addition.</li>
             </ul>
+            Choose Colors: Select a color combination to update the display style.<br/>
+            Show/Hide docs: Toggles this display section.<br/>
+            Reset: Brings application back to starting status.
             <hr>
-            <ul>
-              <li>Colors: Select a color combination to update display style.</li>
-              <li>Show/Hide docs: Toggles this section display.
-              <li>Reset: Brings application back to starting status.</li>
-            </ul>
-            <hr>
-            <ul>
-              <li>Hey, can we <a href="../number-grid-no-bg/index.html">get rid of the background image</a>?</li>
-            </ul>
+            <li>Hey, can we <a href="../number-grid-no-bg/index.html">get rid of the background image</a>?</li>
           `
           this.docs=docs
         } else {
