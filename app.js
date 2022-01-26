@@ -233,7 +233,7 @@ const app = Vue.createApp({
         }
       },
       showSequence() {
-        this.reset(true) //preserve index
+        this.reset(true,false,false,true) //preserve index
         for(num in this.gridNum) {
           if(this.gridNum[num].id%this.sequenceIndex===0) {
             this.gridNum[num].hilite=true
