@@ -40,28 +40,15 @@ const app = Vue.createApp({
           {index: 4, primary: 'Tan', secondary: 'DarkGoldenrod', tertiary: 'black'},
           {index: 5, primary: 'Aqua', secondary: 'Teal', tertiary: 'black'},
           {index: 6, primary: 'FireBrick', secondary: 'Gold', tertiary: 'white'},
+          {index: 7, primary: 'Blue', secondary: 'DeepSkyBlue', tertiary: 'white'},
+          {index: 8, primary: '', secondary: '', tertiary: ''}, //!!!always keep this last in array
         ],
       };
     },
     computed: {
       getColorClass() {
         if(DEBUG) console.log(this.colorIndex)
-        switch (this.colorIndex) {
-          case 1: return 'color1'
-          break
-          case 2: return 'color2'
-          break
-          case 3: return 'color3'
-          break
-          case 4: return 'color4'
-          break
-          case 5: return 'color5'
-          break
-          case 6: return 'color6'
-          break
-          default: return 'color0'
-          break
-        }
+        return this.colorIndex<this.colors.length-1 ? 'color'+this.colorIndex : this.randColors()
       },
       getRandDisplay() {
         return this.repeatRand ? "show" : "hide"
@@ -109,6 +96,7 @@ const app = Vue.createApp({
           this.docs=''
         }
         this.repeatRand=false
+        this.clearRand=false
         this.getSequence=false
         if(TABLE) console.table(this.gridNum[num].id)
       },
@@ -120,6 +108,43 @@ const app = Vue.createApp({
           if(DEBUG)console.log(this.ops[this.opsIndex].func)
           eval(this.ops[this.opsIndex].func)
         }
+      },
+      colorsInList() {
+        return this.colors.slice(0,this.colors.length-1)
+      },
+      //I'm Feeling Lucky!
+      randColors() {
+        let randTotal=0
+        let appendStyles=''
+        const classNum=this.colors.length-1
+        const randomR=Math.round(Math.random()*255-1)+1
+        const randomG=Math.round(Math.random()*255-1)+1
+        const randomB=Math.round(Math.random()*255-1)+1
+        randTotal=(randomR+299+randomG+587+randomB+144)/1000 //special sauce explained: https://css-tricks.com/css-variables-calc-rgb-enforcing-high-contrast-colors/    
+        randPrimary=`rgb(${randomR},${randomG},${randomB})`
+        randSecondary=`rgb(${randomR>235?randomR-40:randomR+40},${randomG>235?randomG-40:randomG+40},${randomB>235?randomB-40:randomB+40})`
+        randTertiary=randTotal<128 ? "white" : "black"
+        if(DEBUG) console.log(randPrimary,randSecondary)
+        //add random color to appended styles
+        appendStyles = `<style>
+        h1.color${classNum}{color:${randPrimary}!important;text-shadow:2px 2px ${randSecondary}!important;}
+        fieldset.color${classNum},legend.color${classNum},.color${classNum} .grid-item{border:2px solid ${randSecondary}!important;}
+        legend.color${classNum}{color:${randPrimary}!important;text-shadow:1px 1px ${randSecondary};}
+        .color${classNum} select,.color${classNum} button{color:${randTertiary};background-color:${randPrimary}!important;border-bottom:solid 3px ${randSecondary}!important;}
+        .bc-div.color${classNum}{border:2px solid ${randSecondary}!important;}
+        </style>`
+        this.colors[this.colors.length-1].primary=randPrimary
+        this.colors[this.colors.length-1].secondary=randSecondary
+        this.colors[this.colors.length-1].tertiary=randTertiary
+        if(!DEBUG) console.log(appendStyles)
+        //ToDo: should do with VUE!
+        const head=document.getElementsByTagName('head')[0]
+        const styles=head.getElementsByTagName('style')
+        if(styles.length>1){
+          head.removeChild(styles[head.getElementsByTagName('style').length-1]);
+        }        
+        document.head.insertAdjacentHTML("beforeend", appendStyles)
+        return `color${classNum}`
       },
       //return prime numbers from 1 to num
       getPrimes: (num)=>Array(num-1).fill().map((e,i)=>2+i).filter((e,i,a)=>a.slice(0,i).every(x=>e%x!==0)),
@@ -138,7 +163,7 @@ const app = Vue.createApp({
       showOrdinals() {
         //modify numbers to display ordinals
         for(num in this.gridNum) {
-          if([0,4,5,6,7,8,9,11,12,13].includes(this.gridNum[num].id %10)) {
+          if([0,4,5,6,7,8,9,11,12,13].includes(this.gridNum[num].id)) {
             this.gridNum[num].id+='th'
           } else if(this.gridNum[num].id %10 === 1) {
             this.gridNum[num].id+='st'
@@ -146,6 +171,8 @@ const app = Vue.createApp({
            this.gridNum[num].id+='nd'
           } else if(this.gridNum[num].id %10 === 3) {
             this.gridNum[num].id+='rd'
+          } else {
+            this.gridNum[num].id+='th'            
           }
         }
       },
@@ -290,6 +317,23 @@ const app = Vue.createApp({
     },
     created() {
       this.initGrid();
+      //add preset colors to appended styles
+      let i=0
+      let appendStyles='<style>'
+      for (color of this.colors) {
+        i=color.index
+        if(i<this.colors.length-1) {
+          appendStyles+=`
+          h1.color${i}{color:${color.primary}!important;text-shadow:2px 2px ${color.secondary}!important;}
+          fieldset.color${i},legend.color${i},.color${i} .grid-item{border:2px solid ${color.secondary}!important;}
+          legend.color${i} {color:${color.primary}!important;text-shadow:1px 1px ${color.secondary};}
+          .color${i} select,.color${i} button{color:${color.tertiary};background-color:${color.primary}!important;border-bottom:solid 3px ${color.secondary}!important;}
+          .bc-div.color${i}{border:2px solid ${color.secondary}!important;}
+          `
+        }
+      }
+      appendStyles+='</style>'
+      document.head.insertAdjacentHTML("beforeend", appendStyles)//ToDo: should do with VUE!
     }
   });
   app.config.productionTip = false

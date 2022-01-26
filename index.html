@@ -1,6 +1,5 @@
 <!--
 TO DO:
-☑ Make color pickers instead of select
 ☑ Rotate different bg images
 ☑ Add more ops
 -->
@@ -50,7 +49,8 @@ TO DO:
             <div class="right">
                 <select name="colors" @change="changeColors($event, $event.target.selectedIndex)" v-model="colorIndex" title="Jazz it up!!!">
                     <option value="-1">Choose colors...</option>
-                    <option v-for="color in colors" :value="color.index">{{color.primary}}/{{color.secondary}}</option>
+                    <option v-for="color in colorsInList()" :value="color.index">{{color.primary}}/{{color.secondary}}</option>
+                    <option :value="colors.length-1">I'm Feeling Lucky!</option>
                 </select>
             </div>
         </fieldset>
