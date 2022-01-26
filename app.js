@@ -280,10 +280,11 @@ const app = Vue.createApp({
             <ul style="margin-left:-1rem;">
               <li>Square: Highlights perfect squares (numbers that give a whole square root).</li>
               <li>Prime: Highlights primes (numbers that have only 2 factors: 1 and themselves).</li>
-              <li>Fibonacci: Highlights Fibonicci's numbers (Given the next number is found by adding up the two numbers before it).</li>
               <li>Ordinal: Displays numbers in ordinal notation (Nst, Nnd, Nrd, etc).</li>
+              <li>Fibonacci: Highlights Fibonicci's numbers (Given the next number is found by adding up the two numbers before it).</li>
               <li>Roman: Displays numbers in roman format (I, II, III, etc).</li>
-              <li>Sequence: Select a number to highlight a range of ordered numbers linked by addition.</li>
+              <li>Random: Generate a random number between 1 and 100. "+" adds more to the results, "-" clears all.</li>
+              <li>Sequence: Highlight a range of ordered numbers linked by addition using a seed number from 1 to 10.</li>
             </ul>
             Choose Colors: Select a color combination to update the display style.<br/>
             Show/Hide docs: Toggles this display section.<br/>
