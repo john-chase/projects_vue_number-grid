@@ -3,7 +3,7 @@ html body{margin:0!important;}
 fieldset{margin:1rem 4rem 1rem;background-color:#FFF;border:2px solid #000}
 legend{font-size:1.25em;font-weight:100;background-color:#fff;border-radius:8px;padding:0px 24px 3px 6px;color:#000;border:2px solid #000;text-shadow:1px 1px silver;}
 input,select,textarea,button{font-family:inherit;font-size:inherit;background-color:silver;margin:4px;padding-top:2px;border:none;border-bottom:solid 3px #000;vertical-align:top;}
-button{height:27px;}
+button{height:27px;position:relative}
 select{width:184px;height:27px;padding:2px 6px;-webkit-appearance:none;-moz-appearance:none;appearance:none;}
 .selArrowsBlack{background-image:url("../images/double-down-arrow-black.png");background-size:.75em;background-position:calc(100% - .5em)center;background-repeat:no-repeat;}
 .selArrowsWhite{background-image:url("../images/double-down-arrow-white.png");background-size:.75em;background-position:calc(100% - .5em)center;background-repeat:no-repeat;}

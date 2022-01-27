@@ -132,6 +132,7 @@ const app = Vue.createApp({
         fieldset.color${classNum},legend.color${classNum},.color${classNum} .grid-item{border:2px solid ${randSecondary}!important;}
         legend.color${classNum}{color:${randPrimary}!important;text-shadow:1px 1px ${randSecondary};}
         .color${classNum} select,.color${classNum} button{color:${randTertiary};background-color:${randPrimary}!important;border-bottom:solid 3px ${randSecondary}!important;}
+        .color${classNum} button:hover{top:2px;color:${randPrimary};background-color:${randSecondary}!important;border-bottom:none!important;}
         .bc-div.color${classNum}{border:2px solid ${randSecondary}!important;}
         </style>`
         this.colors[this.colors.length-1].primary=randPrimary
@@ -327,6 +328,7 @@ const app = Vue.createApp({
           fieldset.color${i},legend.color${i},.color${i} .grid-item{border:2px solid ${color.secondary}!important;}
           legend.color${i} {color:${color.primary}!important;text-shadow:1px 1px ${color.secondary};}
           .color${i} select,.color${i} button{color:${color.tertiary};background-color:${color.primary}!important;border-bottom:solid 3px ${color.secondary}!important;}
+          .color${i} button:hover{top:2px;color:${color.primary};background-color:${color.secondary}!important;border-bottom:none!important;}
           .bc-div.color${i}{border:2px solid ${color.secondary}!important;}
           `
         }
