@@ -31,17 +31,19 @@ const app = Vue.createApp({
         //placeholder for documentation - controls display on/off
         docs: '',
         docuLegend: '',
+        //for contrasting button color
+        contrast: '',
         //available colors
         colors: [
-          {index: 0, primary: 'Silver', secondary: 'Black', tertiary: 'black'},
-          {index: 1, primary: 'Orange', secondary: 'HotPink', tertiary: 'black'},
-          {index: 2, primary: 'DodgerBlue', secondary: 'Purple', tertiary: 'white'},
-          {index: 3, primary: 'PaleGreen',secondary: 'Lime', tertiary: 'black'},
-          {index: 4, primary: 'Tan', secondary: 'DarkGoldenrod', tertiary: 'black'},
-          {index: 5, primary: 'Aqua', secondary: 'Teal', tertiary: 'black'},
-          {index: 6, primary: 'FireBrick', secondary: 'Gold', tertiary: 'white'},
-          {index: 7, primary: 'Blue', secondary: 'DeepSkyBlue', tertiary: 'white'},
-          {index: 8, primary: '', secondary: '', tertiary: ''}, //!!!always keep this last in array
+          {index: 0, primary: 'Silver', secondary: 'Black', tertiary: 'black', contrast: 'white'},
+          {index: 1, primary: 'Orange', secondary: 'HotPink', tertiary: 'black', contrast: 'white'},
+          {index: 2, primary: 'DodgerBlue', secondary: 'Thistle', tertiary: 'white', contrast: 'black'},
+          {index: 3, primary: 'PaleGreen',secondary: 'Lime', tertiary: 'black', contrast: 'white'},
+          {index: 4, primary: 'Tan', secondary: 'DarkGoldenrod', tertiary: 'black', contrast: 'white'},
+          {index: 5, primary: 'Aqua', secondary: 'Teal', tertiary: 'black', contrast: 'white'},
+          {index: 6, primary: 'FireBrick', secondary: 'Gold', tertiary: 'white', contrast: 'black'},
+          {index: 7, primary: 'DeepSkyBlue', secondary: 'Blue', tertiary: 'black', contrast: 'white'},
+          {index: 8, primary: '', secondary: '', tertiary: '', contrast: ''}, //!!!always keep this last in array
         ],
       };
     },
@@ -124,15 +126,17 @@ const app = Vue.createApp({
         randTotal=((randomR+299+randomG+587+randomB+144)/10).toFixed(0) //special sauce explained: https://css-tricks.com/css-variables-calc-rgb-enforcing-high-contrast-colors/    
         randPrimary=`rgb(${randomR},${randomG},${randomB})`
         randSecondary=`rgb(${randomR>235?randomR-40:randomR+40},${randomG>235?randomG-40:randomG+40},${randomB>235?randomB-40:randomB+40})`
-        randTertiary=randTotal<128 ? "white" : "black"
-        if(!DEBUG) console.log(randPrimary,randSecondary,randTertiary,randTotal)
+        randTertiary=randTotal<148 ? "white" : "black"
+        this.contrast=randTotal>=148 ? "white" : "black"
+        if(DEBUG) console.log(randPrimary,randSecondary,randTertiary,randTotal,this.contrast)
         //add random color to appended styles
         appendStyles = `<style>
         h1.color${classNum}{color:${randPrimary}!important;text-shadow:2px 2px ${randSecondary}!important;}
         fieldset.color${classNum},legend.color${classNum},.color${classNum} .grid-item{border:2px solid ${randSecondary}!important;}
         legend.color${classNum}{color:${randPrimary}!important;text-shadow:1px 1px ${randSecondary};}
         .color${classNum} select,.color${classNum} button{color:${randTertiary};background-color:${randPrimary}!important;border-bottom:solid 3px ${randSecondary}!important;}
-        .color${classNum} button:hover{top:2px;color:${randPrimary};background-color:${randSecondary}!important;border-bottom:none!important;}
+        .color${classNum} button:hover{top:1px;color:${this.contrast};background-color:${randSecondary}!important;border-bottom:none!important;transition-property:background-color,color,top;transition-duration:.25s;}
+        .color${classNum} button:active{top:2px;color:red;background-color:white!important;transition-property:background-color,color,top;transition-duration:.25s;}
         .bc-div.color${classNum}{border:2px solid ${randSecondary}!important;}
         </style>`
         this.colors[this.colors.length-1].primary=randPrimary
@@ -328,7 +332,8 @@ const app = Vue.createApp({
           fieldset.color${i},legend.color${i},.color${i} .grid-item{border:2px solid ${color.secondary}!important;}
           legend.color${i} {color:${color.primary}!important;text-shadow:1px 1px ${color.secondary};}
           .color${i} select,.color${i} button{color:${color.tertiary};background-color:${color.primary}!important;border-bottom:solid 3px ${color.secondary}!important;}
-          .color${i} button:hover{top:2px;color:${color.primary};background-color:${color.secondary}!important;border-bottom:none!important;}
+          .color${i} button:hover{top:1px;color:${color.contrast};background-color:${color.secondary}!important;border-bottom:none!important;transition-property:background-color,color,top;transition-duration:.25s;}
+          .color${i} button:active{top:2px;color:red;background-color:white!important;transition-property:background-color,color,top;transition-duration:.25s;}          
           .bc-div.color${i}{border:2px solid ${color.secondary}!important;}
           `
         }
