@@ -27,7 +27,7 @@ const app = Vue.createApp({
           {index: 6, operation: 'Sequence', func: 'this.showSequence()'},
         ],
         //color selector index
-        colorIndex: 0,
+        colorIndex: -1,
         //placeholder for documentation - controls display on/off
         docs: '',
         docuLegend: '',
@@ -48,6 +48,7 @@ const app = Vue.createApp({
     computed: {
       getColorClass() {
         if(DEBUG) console.log(this.colorIndex)
+        if(this.colorIndex===-1) return 'color0'
         return this.colorIndex<this.colors.length-1 ? 'color'+this.colorIndex : this.randColors()
       },
       getRandDisplay() {
@@ -58,6 +59,10 @@ const app = Vue.createApp({
       },
       getSeqDisplay() {
         return this.getSequence ? "show" : "hide"
+      },
+      getArrowColor() {
+        if(this.colorIndex===-1) return 'selArrowsBlack'
+        return this.colors[this.colorIndex].tertiary==='black'?'selArrowsBlack':'selArrowsWhite'
       }
     },
     methods: {
@@ -86,11 +91,7 @@ const app = Vue.createApp({
         }
         if(!colorPreserve) {
           this.colorIndex='0'
-          this.changeColors('',1)
-        } else {
-          if(this.colorIndex===-1) {
-            alert('Please choose a color!')
-          }
+          this.changeColors('',0)
         }
         if(!docPreserve) {
           this.docs=''
@@ -120,11 +121,11 @@ const app = Vue.createApp({
         const randomR=Math.round(Math.random()*255-1)+1
         const randomG=Math.round(Math.random()*255-1)+1
         const randomB=Math.round(Math.random()*255-1)+1
-        randTotal=(randomR+299+randomG+587+randomB+144)/1000 //special sauce explained: https://css-tricks.com/css-variables-calc-rgb-enforcing-high-contrast-colors/    
+        randTotal=((randomR+299+randomG+587+randomB+144)/10).toFixed(0) //special sauce explained: https://css-tricks.com/css-variables-calc-rgb-enforcing-high-contrast-colors/    
         randPrimary=`rgb(${randomR},${randomG},${randomB})`
         randSecondary=`rgb(${randomR>235?randomR-40:randomR+40},${randomG>235?randomG-40:randomG+40},${randomB>235?randomB-40:randomB+40})`
         randTertiary=randTotal<128 ? "white" : "black"
-        if(DEBUG) console.log(randPrimary,randSecondary)
+        if(!DEBUG) console.log(randPrimary,randSecondary,randTertiary,randTotal)
         //add random color to appended styles
         appendStyles = `<style>
         h1.color${classNum}{color:${randPrimary}!important;text-shadow:2px 2px ${randSecondary}!important;}
@@ -136,7 +137,7 @@ const app = Vue.createApp({
         this.colors[this.colors.length-1].primary=randPrimary
         this.colors[this.colors.length-1].secondary=randSecondary
         this.colors[this.colors.length-1].tertiary=randTertiary
-        if(!DEBUG) console.log(appendStyles)
+        if(DEBUG) console.log(appendStyles)
         //ToDo: should do with VUE!
         const head=document.getElementsByTagName('head')[0]
         const styles=head.getElementsByTagName('style')
@@ -233,7 +234,7 @@ const app = Vue.createApp({
         }
       },
       showSequence() {
-        this.reset(true,false,false,true) //preserve index
+        this.reset(true,true,true,true) //preserve index
         for(num in this.gridNum) {
           if(this.gridNum[num].id%this.sequenceIndex===0) {
             this.gridNum[num].hilite=true
@@ -306,7 +307,7 @@ const app = Vue.createApp({
         if(DEBUG) console.log("colorIndex: "+this.colorIndex+ ", num: "+JSON.stringify(num), num.hilite ? 'silver' : '#fff')
         if(num.hilite && this.colorIndex>0) {
           return 'background-color:'+this.colors[this.colorIndex].primary+';color:'+this.colors[this.colorIndex].tertiary
-        } else if(num.hilite && this.colorIndex===0) {
+        } else if(num.hilite && (this.colorIndex===0||this.colorIndex===-1)) {
           return 'background-color:silver;color:black'
         } else {
            return 'background-color:white;color:black'
