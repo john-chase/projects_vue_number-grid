@@ -20,41 +20,43 @@ TO DO:
     <script src="https://unpkg.com/vue@next" defer></script>
     <script src="app.js" defer></script>
 </head>
-<body>
-    <div id="app">
+<body id="app" :style="{'background-color': colorIndex===-1?colors[colorIndex+1].primary:colors[colorIndex].primary}">
+    <div :style="{'background-color': colorIndex===-1?colors[colorIndex+1].primary:colors[colorIndex].primary}">
         <!--#include virtual="/includes/vue-number-grid-header.html"-->
         <div id="doc-div" :class="['hide', {show: docs}]" title="Help is here.">
-            <fieldset :class="getColorClass">
+            <fieldset :class="getColorClass" style="background-color:rgba(255,255,255,.65)!important;">
                 <legend :class="getColorClass">{{ docuLegend }}</legend>
                 <p v-html="docs"></p>
             </fieldset>
         </div>
-        <fieldset :class="getColorClass" style="background-color:rgba(255,255,255,.65)!important" title="Do stuff.">
-            <legend :class="getColorClass">Functions</legend>
-            <div class="ops-container">
-            <div class="left" :class="getColorClass">
-                <select name="ops" id="ops" @change="showOps()" v-model="opsIndex" title="You have to choose an action!" :class="getArrowColor">
-                    <option value="-1">Choose Operation...</option>
-                    <option v-for="op in ops" :value="op.index">{{op.operation}}</option>
-                </select>
-                <button id="repeatRand" :class="getRandDisplay" @click="showRandom()" title="lather, rinse, repeat...">+</button>
-                <button id="clearRand" :class="setRandDisplay" @click="hideRandom()" title="clear random numbers...">-</button>
-                <select name="sequence" id="getSequence" @change="showSequence()" v-model="sequenceIndex" :class="[getSeqDisplay, getArrowColor]">
-                    <option value="0">Seed Number...</option>
-                    <option v-for="i in 10" :key="i">{{i}}</option>
-                </select>
-            </div>
-            <div class="right"><button @click="reset(false,false,false)" title="Start over.">Reset</button></div>
-            <div class="right"><button @click="showDocs(docs)" title="Can I get some help?">{{docs?'Hide':'Show'}} Docs</button></div>
-            <div class="right">
-                <select name="colors" @change="changeColors($event, $event.target.selectedIndex)" v-model="colorIndex" title="Jazz it up!!!" :class="getArrowColor">
-                    <option value="-1">Choose colors...</option>
-                    <option v-for="color in colorsInList()" :value="color.index">{{color.primary}}/{{color.secondary}}</option>
-                    <option :value="colors.length-1">I'm Feeling Lucky!</option>
-                </select>
-            </div>
-        </fieldset>
-        <div id="grid">
+        <div class="ops-div" :style="{'background-color': colorIndex===-1?colors[colorIndex+1].primary:colors[colorIndex].primary}">
+            <fieldset :class="getColorClass" style="background-color:rgba(255,255,255,.65)!important" title="Do stuff.">
+                <legend :class="getColorClass">Functions</legend>
+                <div class="ops-container">
+                <div class="left" :class="getColorClass">
+                    <select name="ops" id="ops" @change="showOps()" v-model="opsIndex" title="You have to choose an action!" :class="getArrowColor">
+                        <option value="-1">Choose Operation...</option>
+                        <option v-for="op in ops" :value="op.index">{{op.operation}}</option>
+                    </select>
+                    <button id="repeatRand" :class="getRandDisplay" @click="showRandom()" title="lather, rinse, repeat...">+</button>
+                    <button id="clearRand" :class="setRandDisplay" @click="hideRandom()" title="clear random numbers...">-</button>
+                    <select name="sequence" id="getSequence" @change="showSequence()" v-model="sequenceIndex" :class="[getSeqDisplay, getArrowColor]">
+                        <option value="0">Seed Number...</option>
+                        <option v-for="i in 10" :key="i">{{i}}</option>
+                    </select>
+                </div>
+                <div class="right"><button @click="reset(false,false,false,false)" title="Start over.">Reset</button></div>
+                <div class="right"><button @click="showDocs(docs)" title="Can I get some help?">{{docs?'Hide':'Show'}} Docs</button></div>
+                <div class="right">
+                    <select name="colors" @change="changeColors($event, $event.target.selectedIndex)" v-model="colorIndex" title="Jazz it up!!!" :class="getArrowColor">
+                        <option value="-1">Choose colors...</option>
+                        <option v-for="color in colorsInList()" :value="color.index">{{color.primary}}/{{color.secondary}}</option>
+                        <option :value="colors.length-1">I'm Feeling Lucky!</option>
+                    </select>
+                </div>
+            </fieldset>
+        </div>
+        <div id="grid" :style="{'background-color': colorIndex===-1?colors[colorIndex+1].primary:colors[colorIndex].primary}">
             <fieldset :class="getColorClass" style="background-color:rgba(255,255,255,.65)!important" title="Where the results are.">
                 <legend :class="getColorClass">Grid</legend>
                 <div class="getColorClass row grid">
