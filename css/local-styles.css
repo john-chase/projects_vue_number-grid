@@ -1,6 +1,8 @@
 /*elements*/
-html body{margin:0!important;}
-fieldset{margin:1rem 4rem 1rem;border:2px solid #000}
+*{margin:0;}
+html{height:vh!important;width:100%}
+body{min-height:vh!important;margin:0!important}
+fieldset{margin:1rem 4rem;border:2px solid #000}
 legend{font-size:1.25em;font-weight:100;background-color:#fff;border-radius:8px;padding:0px 24px 3px 6px;color:#000;border:2px solid #000;text-shadow:1px 1px silver;}
 input,select,textarea,button{font-family:inherit;font-size:inherit;background-color:silver;margin:4px;padding-top:2px;border:none;border-bottom:solid 3px #000;vertical-align:top;}
 button{height:27px;position:relative;top:0}
@@ -9,13 +11,12 @@ select{width:184px;height:27px;padding:2px 6px;-webkit-appearance:none;-moz-appe
 .selArrowsWhite{background-image:url("../images/double-down-arrow-white.png");background-size:.75em;background-position:calc(100% - .5em)center;background-repeat:no-repeat;}
 
 /*ids*/
-#app{margin:0;padding-bottom:4rem;}/*background:url("../images/numbers-bg-1920.jpg")top/45% repeat;}*/
+#app{}/*for image: background:url("../images/numbers-bg-1920.jpg")top/45% repeat;}*/
+#cir-footer-wrapper {text-align:center;margin-top:.5rem}
+#pad{margin:-1rem 0 1rem 0;padding:1rem;}
 
 /*classes*/
 .copyright {font-size:80%; color:white;padding-bottom:1em;}
-.trans-top,.trans-bottom{height:30px;margin-top:0rem;}
-.trans-top{background:linear-gradient(180deg,rgba(0,0,0,1)0%,rgba(0,212,255,0)100%);}
-.trans-bottom{background:linear-gradient(0deg,rgba(0,0,0,1)0%,rgba(0,212,255,0)100%);}
 .ops-container{display:inline-block;width:100%;}
 .right{float:right;}
 .left{float:left;}

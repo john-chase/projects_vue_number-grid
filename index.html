@@ -65,6 +65,11 @@ TO DO:
             </fieldset>
         </div>
     </div>
-    <!--#include virtual="/includes/footer.html"-->
+    <div id="pad" :style="{'background-color':colorIndex===-1?colors[colorIndex+1].primary:colors[colorIndex].primary}">
+        <p>&nbsp;</p>
+    </div>
+    <div :style="{'background-color': colorIndex===-1?colors[colorIndex+1].primary:colors[colorIndex].primary}">
+        <!--#include virtual="/includes/footer.html" -->
+    </div>
 </body>
 </html>
