@@ -20,11 +20,11 @@ TO DO:
     <script src="https://unpkg.com/vue@next" defer></script>
     <script src="app.js" defer></script>
 </head>
-<body id="app" :style="{'background-color': colorIndex===-1?colors[colorIndex+1].primary:colors[colorIndex].primary}'!important'">
+<body id="app" :style="{'background-color': colorIndex===-1?colors[colorIndex+1].primary:colors[colorIndex].primary}">
     <div :style="{'background-color': colorIndex===-1?colors[colorIndex+1].primary:colors[colorIndex].primary}">
         <!--#include virtual="/includes/vue-number-grid-header.html"-->
         <div id="doc-div" :class="['hide', {show: docs}]" title="Help is here.">
-            <fieldset :class="getColorClass" style="background-color:rgba(255,255,255,.65)!important;">
+            <fieldset :class="getColorClass" style="background-color:rgba(255,255,255,.65)!important">
                 <legend :class="getColorClass">{{ docuLegend }}</legend>
                 <p v-html="docs"></p>
             </fieldset>
